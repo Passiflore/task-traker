@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import NotFound from "./pages/Notfound";
+import Navigation from "./components/Navigation";
 // import Dashboard from "./pages/Dashboard"; // À décommenter quand Dashboard sera créé
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
 				<Route path="/register" element={<Register />} />
 				<Route path="*" element={<NotFound />} />{" "}
 			</Routes>
+			<Navigation />
 		</BrowserRouter>
 	);
 }
