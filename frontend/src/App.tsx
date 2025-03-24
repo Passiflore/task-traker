@@ -11,6 +11,7 @@ import Navigation from "./components/Navigation";
 function App() {
 	return (
 		<BrowserRouter>
+			<Navigation />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
@@ -18,7 +19,6 @@ function App() {
 				<Route path="/register" element={<Register />} />
 				<Route path="*" element={<NotFound />} />{" "}
 			</Routes>
-			<Navigation />
 		</BrowserRouter>
 	);
 }
