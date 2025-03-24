@@ -4,8 +4,6 @@ Task Tracker is a simple application designed to help developers manage their ta
 
 ## To-Do List
 
-- [ ] Implement user authentication
-- [ ] Create database schema
 - [ ] Develop API endpoints
 - [ ] Design frontend interface
 - [ ] Write unit tests
@@ -17,3 +15,5 @@ Task Tracker is a simple application designed to help developers manage their ta
 - [x] Set up development environment
 - [x] Install necessary dependencies
 - [x] Configure linter and formatter
+- [x] Implement user authentication
+- [x] Create database schema
