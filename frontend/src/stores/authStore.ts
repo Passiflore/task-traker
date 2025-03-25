@@ -1,11 +1,16 @@
 import { create } from "zustand";
 import { loginUser, registerUser } from "../services/api";
 
+export interface User {
+	email: string;
+	id: string;
+}
+
 interface AuthStore {
 	isAuth: boolean;
 	token: string | null;
-	user: { email: string; id: string } | null;
 	error: string | null;
+	user: User | null;
 	loading: boolean;
 
 	login: (email: string, password: string) => Promise<void>;
@@ -16,7 +21,9 @@ interface AuthStore {
 const useUserStore = create<AuthStore>((set) => ({
 	isAuth: localStorage.getItem("token") ? true : false,
 	token: localStorage.getItem("token"),
-	user: null,
+	user: localStorage.getItem("user")
+		? JSON.parse(localStorage.getItem("user") as string)
+		: null,
 	error: null,
 	loading: false,
 
@@ -24,13 +31,15 @@ const useUserStore = create<AuthStore>((set) => ({
 		set({ loading: true, error: null });
 		try {
 			const response = await loginUser({ email, password });
-			const token = response.data;
+			const { token, user } = response.data;
 
 			localStorage.setItem("token", token);
+			localStorage.setItem("user", JSON.stringify(user));
 
 			set({
 				isAuth: true,
 				token: token,
+				user: user,
 				loading: false,
 			});
 		} catch (error) {

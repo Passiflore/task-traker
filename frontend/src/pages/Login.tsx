@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import useUserStore from "../stores/authStore";
 import { useNavigate } from "react-router-dom";
 
-const FormContainer = styled.div`
+export const FormContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
@@ -14,16 +14,14 @@ const FormContainer = styled.div`
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const login = useUserStore((state) => state.login);
-
-	const loading = useUserStore((state) => state.loading);
+	const userStore = useUserStore();
 	const navigate = useNavigate();
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
 
 		try {
-			await login(email, password);
+			await userStore.login(email, password);
 			navigate("/");
 		} catch (error) {
 			console.log("Erreur lors de la connection ", error);
@@ -51,8 +49,8 @@ const Login = () => {
 						placeholder="Enter your password"
 						required
 					/>
-					<button type="submit" disabled={loading}>
-						{loading ? "Chargement..." : "Se connecter"}
+					<button type="submit" disabled={userStore.loading}>
+						{userStore.loading ? "Chargement..." : "Se connecter"}
 					</button>
 				</FormContainer>
 			</form>

@@ -16,7 +16,7 @@ api.interceptors.request.use((config) => {
 
 export const loginUser = (credentials) => api.post("/auth/login", credentials);
 export const registerUser = (userData) => api.post("/auth/register", userData);
-export const fetchTasks = () => api.get("/tasks/getTasks");
+export const fetchTasks = (userData) => api.get("/tasks/getTasks", userData);
 export const createTask = (taskData) => api.post("/tasks/createTask", taskData);
 
 export default api;

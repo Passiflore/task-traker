@@ -12,20 +12,25 @@ export async function getTasks(req, res) {
 export async function createTask(req, res) {
 	try {
 		const { title, description } = req.body;
-
 		const newTask = await Task.create({
 			title,
 			description,
-			// user: req.user.id,
+			user: req.user.id,
 		});
 
 		await newTask.save();
 
 		res.status(201).json({
 			message: "Tâche créée avec succès",
-			task: { title: newTask.title, description: newTask.description },
+			task: {
+				id: newTask._id,
+				title: newTask.title,
+				description: newTask.description,
+				status: newTask.status,
+				createdAt: newTask.createdAt,
+				user: newTask.user,
+			},
 		});
-		res.status(201).json(newTask);
 	} catch {
 		res.status(500).json({ message: "Erreur lors de la création de la tâche" });
 	}

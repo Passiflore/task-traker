@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import NotFound from "./pages/Notfound";
 import Navigation from "./components/Navigation";
-// import Dashboard from "./pages/Dashboard"; // À décommenter quand Dashboard sera créé
+import Dashboard from "./pages/Dashboard";
 
 function App() {
 	return (
@@ -15,7 +15,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
-				{/* <Route path="/dashboard" element={<Dashboard />} /> */}
+				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="*" element={<NotFound />} />{" "}
 			</Routes>

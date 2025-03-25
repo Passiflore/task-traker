@@ -40,12 +40,18 @@ export async function login(req, res) {
 			return res.status(401).json({ message: "Mot de passe invalide" });
 		}
 
-		const token = jwt.sign({ id: existingUser.email }, process.env.JWT_SECRET, {
+		const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, {
 			expiresIn: "1h",
 		});
 
-		res.send(token);
-	} catch {
+		res.json({
+			token,
+			user: {
+				id: existingUser._id,
+				email: existingUser.email,
+			},
+		});
+	} catch (error) {
 		res.status(500).json({ message: "Erreur serveur lors du login" });
 	}
 }
